@@ -22,7 +22,7 @@ public class ItemController {
     @GetMapping("/customers/{customer_id}/items")
     public ResponseEntity<List<Item>> getAllCommentsByTutorialId(@PathVariable Long customer_id) {
         if (!customerRepository.existsById(customer_id)) {
-            throw new ResourceNotFoundException("Not found Tutorial with id = " + customer_id);
+            throw new ResourceNotFoundException("Not found Items with Customer id = " + customer_id);
         }
         List<Item> items = itemRepository.findAllByCustomerId(customer_id);
         return new ResponseEntity<>(items, HttpStatus.OK);
