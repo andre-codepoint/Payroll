@@ -15,13 +15,14 @@ class LoadDatabase {
     CommandLineRunner initDatabase(CustomerRepository customerRepository, ItemRepository itemRepository) {
 
         return args -> {
-            Customer emp01=new Customer();
-            emp01.setName("Little Bob");
-            emp01.setRole(Role.USER);
-            emp01.getItem().add(new Item( "iPhone", "Super magic iPhone 8g with custom case", 699, 3));
-            emp01.getItem().add(new Item("Android Smartphone", "All day all weather for everybody Android Phone", 199, 4));
-            emp01.getItem().add(new Item("Nokia 3310", "Oldschool 1g phone for hipster", 100, 1));
+            Customer emp01=new Customer("Little Bob", Role.USER);
+            Item item01 = new Item( "iPhone", "Super magic iPhone 8g with custom case", 699, 3, emp01);
+            Item item02 =new Item("Android Smartphone", "All day all weather for everybody Android Phone", 199, 4, emp01);
+            Item item03 =new Item("Nokia 3310", "Oldschool 1g phone for hipster", 100, 1, emp01);
             customerRepository.save(emp01);
+            itemRepository.save(item01);
+            itemRepository.save(item02);
+            itemRepository.save(item03);
 
         };
     }

@@ -1,6 +1,8 @@
 package com.example.payroll;
 
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.lang.NonNull;
 
 import javax.persistence.*;
@@ -20,14 +22,20 @@ class Item {
 
     private @NonNull Integer quantity;
 
+    @ManyToOne(fetch = FetchType.EAGER, optional = true)
+    @JoinColumn(name = "customer_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private Customer customer;
+
     public  Item() {
     }
 
-    public Item(String title, String description, Integer price, Integer quantity) {
+    public Item(@NonNull String title, String description, @NonNull Integer price, @NonNull Integer quantity, Customer customer) {
         this.title = title;
         this.description = description;
         this.price = price;
         this.quantity = quantity;
+        this.customer = customer;
     }
 
     public Long getId() {
@@ -73,17 +81,24 @@ class Item {
         this.quantity = quantity;
     }
 
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Item item)) return false;
-        return Objects.equals(getId(), item.getId()) && getTitle().equals(item.getTitle()) && Objects.equals(getDescription(), item.getDescription()) && getPrice().equals(item.getPrice()) && getQuantity().equals(item.getQuantity());
+        return Objects.equals(getId(), item.getId()) && getTitle().equals(item.getTitle()) && getDescription().equals(item.getDescription()) && getPrice().equals(item.getPrice()) && getQuantity().equals(item.getQuantity()) && Objects.equals(getCustomer(), item.getCustomer());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getTitle(), getDescription(), getPrice(), getQuantity());
+        return Objects.hash(getId(), getTitle(), getDescription(), getPrice(), getQuantity(), getCustomer());
     }
 
     @Override
@@ -94,7 +109,7 @@ class Item {
                 ", description='" + description + '\'' +
                 ", price=" + price +
                 ", quantity=" + quantity +
+                ", customer=" + customer +
                 '}';
     }
-
 }

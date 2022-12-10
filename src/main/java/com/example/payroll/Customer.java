@@ -19,10 +19,10 @@ class Customer {
     @Column(nullable = false)
     private Role role;
 
-    @OneToMany(fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL,
-            orphanRemoval = true)
-    private Set<Item> item = new HashSet<>();
+//    @OneToMany(fetch = FetchType.LAZY,
+//            cascade = CascadeType.ALL,
+//            orphanRemoval = true)
+//    private Set<Item> item = new HashSet<>();
 
     public Customer() {}
 
@@ -30,8 +30,6 @@ class Customer {
         this.name = name;
         this.role = role;
     }
-
-
 
     public Long getId() {
         return id;
@@ -57,33 +55,24 @@ class Customer {
         this.role = role;
     }
 
-    public Set<Item> getItem() {
-        return item;
-    }
-
-    public void setItem(Set<Item> item) {
-        this.item = item;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Customer customer)) return false;
-        return getName().equals(customer.getName()) && getRole() == customer.getRole() && Objects.equals(getItem(), customer.getItem());
+        return getId().equals(customer.getId()) && getName().equals(customer.getName()) && getRole() == customer.getRole();
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getName(), getRole(), getItem());
+        return Objects.hash(getId(), getName(), getRole());
     }
 
     @Override
     public String toString() {
-        return "Employee{" +
+        return "Customer{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", role=" + role +
-                ", item=" + item +
                 '}';
     }
 }
