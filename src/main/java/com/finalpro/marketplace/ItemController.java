@@ -36,12 +36,12 @@ public class ItemController {
     @PostMapping("/customers/{customer_id}/items")
     public ResponseEntity<Item> createItem(@PathVariable(value = "customer_id") Long customerId,
                                                  @RequestBody Item itemRequest) {
-        Item comment = customerRepository.findById(customerId).map(customer -> {
+        Item item = customerRepository.findById(customerId).map(customer -> {
             itemRequest.setCustomer(customer);
             return itemRepository.save(itemRequest);
         }).orElseThrow(() -> new ResourceNotFoundException("Not found Customer with id = " + customerId));
 
-        return new ResponseEntity<>(comment, HttpStatus.CREATED);
+        return new ResponseEntity<>(item, HttpStatus.CREATED);
     }
 
     @PutMapping("/items/{id}")
