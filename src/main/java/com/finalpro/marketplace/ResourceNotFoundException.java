@@ -1,4 +1,4 @@
-package com.example.payroll;
+package com.finalpro.marketplace;
 
 public class ResourceNotFoundException extends RuntimeException {
 

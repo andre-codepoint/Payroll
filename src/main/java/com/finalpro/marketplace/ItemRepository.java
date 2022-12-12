@@ -1,7 +1,6 @@
-package com.example.payroll;
+package com.finalpro.marketplace;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 

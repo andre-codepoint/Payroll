@@ -1,4 +1,4 @@
-package com.example.payroll;
+package com.finalpro.marketplace;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,8 +1,7 @@
-package com.example.payroll;
+package com.finalpro.marketplace;
 
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

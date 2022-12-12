@@ -1,9 +1,7 @@
-package com.example.payroll;
+package com.finalpro.marketplace;
 
 
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 
 import javax.persistence.*;
 
