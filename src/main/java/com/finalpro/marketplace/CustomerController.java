@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 class CustomerController {
 
-    private final CustomerRepository repository;
+    private final CustomerRepository customerRepository;
 
-    CustomerController(CustomerRepository repository) {
-        this.repository = repository;
+    CustomerController(CustomerRepository customerRepository) {
+        this.customerRepository = customerRepository;
     }
 
 
@@ -24,13 +24,13 @@ class CustomerController {
     // tag::get-aggregate-root[]
     @GetMapping("/customers")
     List<Customer> all() {
-        return repository.findAll();
+        return customerRepository.findAll();
     }
     // end::get-aggregate-root[]
 
     @PostMapping("/customers")
-    Customer newEmployee(@RequestBody Customer newCustomer) {
-        return repository.save(newCustomer);
+    Customer newCustomer(@RequestBody Customer newCustomer) {
+        return customerRepository.save(newCustomer);
     }
 
 //    // Single item
@@ -38,27 +38,27 @@ class CustomerController {
     @GetMapping("/customers/{id}")
     Customer one(@PathVariable Long id) {
 
-        return repository.findById(id)
+        return customerRepository.findById(id)
                 .orElseThrow(() -> new UserNotFoundException(id));
     }
 
     @PutMapping("/customers/{id}")
-    Customer replaceEmployee(@RequestBody Customer newCustomer, @PathVariable Long id) {
+    Customer replaceCustomer(@RequestBody Customer newCustomer, @PathVariable Long id) {
 
-        return repository.findById(id)
+        return customerRepository.findById(id)
                 .map(customer -> {
                     customer.setName(newCustomer.getName());
                     customer.setRole(newCustomer.getRole());
-                    return repository.save(customer);
+                    return customerRepository.save(customer);
                 })
                 .orElseGet(() -> {
                     newCustomer.setId(id);
-                    return repository.save(newCustomer);
+                    return customerRepository.save(newCustomer);
                 });
     }
 
     @DeleteMapping("/customers/{id}")
     void deleteEmployee(@PathVariable Long id) {
-        repository.deleteById(id);
+        customerRepository.deleteById(id);
     }
 }

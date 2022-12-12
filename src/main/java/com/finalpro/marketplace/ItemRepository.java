@@ -6,4 +6,6 @@ import java.util.List;
 
 interface ItemRepository extends JpaRepository<Item, Long> {
     List<Item> findAllByCustomerId(Long itemId);
+
+    void deleteByCustomerId(Long customerId);
 }
